@@ -45,8 +45,10 @@ func configFromEnv() *Config {
 	if c.user == "" {
 		u, err := user.Current()
 		if err != nil {
+			c.user = u.Username
+		} else {
+			c.user = os.Getenv("USER")
 		}
-		c.user = u.Username
 	}
 	if c.userKey == "" {
 		c.userKey = "~/.chef/" + c.user + ".pem"
@@ -119,7 +121,8 @@ func main() {
 
 	hostname, port, err := net.SplitHostPort(dst.Host)
 	if err != nil {
-		ssh(args)
+		hostname = dst.Host
+		port = ""
 	}
 
 	if !strings.HasSuffix(hostname, config.tld) {
