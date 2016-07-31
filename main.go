@@ -45,9 +45,9 @@ func configFromEnv() *Config {
 	if c.user == "" {
 		u, err := user.Current()
 		if err != nil {
-			c.user = u.Username
-		} else {
 			c.user = os.Getenv("USER")
+		} else {
+			c.user = u.Username
 		}
 	}
 	if c.userKey == "" {
