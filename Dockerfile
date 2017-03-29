@@ -15,5 +15,5 @@ CMD set -x \
     && for platform in $CROSSPLATFORMS; do \
             GOOS=${platform%/*} \
             GOARCH=${platform##*/} \
-                go build -v -o bin/chef-ssh-${platform%/*}-${platform##*/}; \
+                go build -ldflags="-s -w" -v -o bin/chef-ssh-${platform%/*}-${platform##*/}; \
     done
