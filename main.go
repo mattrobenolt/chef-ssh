@@ -169,7 +169,7 @@ func main() {
 		hostname = ip
 	case LOOKUP_ROLE:
 		hostname = hostname[:len(hostname)-len(".role")]
-		query, err := client.Search.NewQuery("node", "role:"+hostname)
+		query, err := client.Search.NewQuery("node", "roles:"+hostname)
 		if err != nil {
 			log.Fatal("Couldn't get role: ", err)
 		}
